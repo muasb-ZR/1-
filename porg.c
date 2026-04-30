@@ -1,25 +1,24 @@
 #include <stdio.h>
 #include <string.h>
 
-// 1. استخدام اسم مختلف للحجم
 #define MAX_CAPACITY 10 
 
-// 2. تغيير اسم الـ struct وأسماء العناصر بداخله
+//عمل masking لعناصر ال struct
 typedef struct {
-    char data_array[MAX_CAPACITY]; // بدلاً من buffer
-    int write_pos;                 // بدلاً من head
-    int read_pos;                  // بدلاً من tail
-    int active_elements;           // بدلاً من count
-} RingBuffer; // اسم جديد للهيكل
+    char data_array[MAX_CAPACITY]; 
+    int write_pos;                
+    int read_pos;                 
+    int active_elements;          
+} RingBuffer; 
 
-// 3. دالة تهيئة باسم جديد
+// اعطاء قيم صفرية لعناصر الbuffer
 void setupBuffer(RingBuffer *rb) {
     rb->write_pos = 0;
     rb->read_pos = 0;
     rb->active_elements = 0;
 }
 
-// 4. دوال الفحص بأسماء مختلفة
+// فحص إن كان ممتلئ او فارغ
 int bufferFull(RingBuffer *rb) {
     return rb->active_elements == MAX_CAPACITY;
 }
@@ -28,7 +27,7 @@ int bufferEmpty(RingBuffer *rb) {
     return rb->active_elements == 0;
 }
 
-// 5. دالة الإضافة (بأسلوب كتابة مختلف قليلاً)
+// تابع الدخال العناصر
 void pushData(RingBuffer *rb, char val) {
     if (bufferFull(rb)) {
         printf("\n[Warning] Capacity reached! Overflow at: %c", val);
@@ -39,7 +38,7 @@ void pushData(RingBuffer *rb, char val) {
     rb->active_elements++;
 }
 
-// 6. دالة السحب
+// 6. تابع الأخراح
 char popData(RingBuffer *rb) {
     if (bufferEmpty(rb)) {
         printf("\n[Warning] No data available (Underflow).");
@@ -51,16 +50,16 @@ char popData(RingBuffer *rb) {
     return out_val;
 }
 
-// 7. الدالة الرئيسية بتنسيق مختلف
+
 int main() {
     RingBuffer myRing;
     setupBuffer(&myRing);
 
-    char input_text[64]; // زيادة الحجم قليلاً للتغيير
+    char input_text[64]; // زيادة الحجم قليلا
     printf("Enter Student Name: ");
     scanf("%s", input_text);
 
-    // إضافة اللاحقة بأسلوب مختلف
+    
     strcat(input_text, "-CE-ESY");
 
     printf("\nProcessing String: %s\n", input_text);
@@ -75,7 +74,7 @@ int main() {
     while (!bufferEmpty(&myRing)) {
         printf("%c", popData(&myRing));
     }
-
+// طباعة رسالة الإنتهاء من التاسك
     printf("\n\nTask finished successfully.\n");
 
     return 0;
